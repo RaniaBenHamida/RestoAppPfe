@@ -116,7 +116,7 @@ class SaveButton extends StatelessWidget {
             Row(
               children: [
                 SvgPicture.asset(
-                  'asset/logo.svg', // Corrected path to SVG asset
+                  'assets/logo.svg', // Corrected path to SVG asset
                   height: 50,
                 ),
                 SizedBox(
