@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_resto/models/category_model.dart';
+import 'package:flutter_app_resto/models/promo_model.dart';
 import 'package:flutter_app_resto/models/restaurant_model.dart';
 import 'package:flutter_app_resto/widgets/category_box.dart';
 import 'package:flutter_app_resto/widgets/promo_box.dart';
@@ -37,7 +38,7 @@ class Homescreen extends StatelessWidget {
                       Category.Categories.length, // Corrected capitalization
                   itemBuilder: (context, index) {
                     // This method returns the CategoryBox
-                    return CategoryBox(Category.Categories[index]);
+                    return CategoryBox(category: Category[index],);
                   },
                 ),
               ),
@@ -49,10 +50,10 @@ class Homescreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: 3,
+                  itemCount: Promo.promos.length,
                   itemBuilder: (context, index) {
                     // You need to return a widget here (e.g., PromoBox)
-                    return PromoBox(); // Placeholder for PromoBox
+                    return PromoBox(promo: Promo.promos[index]); // Placeholder for PromoBox
                   },
                 ),
               ),
@@ -155,7 +156,7 @@ class RestaurantCard extends StatelessWidget {
     );
   }
 }
-
+// la classe customAppbar consiste de voir l'icon person et sa location 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {

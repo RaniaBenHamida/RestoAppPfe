@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_resto/models/promo_model.dart';
+
 
 class PromoBox extends StatelessWidget {
-  const PromoBox({Key? key}); // Corrected the constructor syntax
+  final Promo promo;
+  const PromoBox({Key? key, required this.promo}); // Corrected the constructor syntax
 
   @override
   Widget build(BuildContext context) {
@@ -15,49 +18,70 @@ class PromoBox extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             image: DecorationImage(
               image: NetworkImage(
-                'https://th.bing.com/th/id/OIP.oNJrYp3m1Z9VKn2LI0_mKwHaEK?rs=1&pid=ImgDetMain',
-                fit: BoxFit.cover,
+                promo.imageUrl,
+              fit: BoxFit.cover,
               ),
             ),
           ),
         ),
-        // TODO: Create a custom clipper in the next episode
-        Container(
-          margin: const EdgeInsets.only(right: 5.0),
-          width: MediaQuery.of(context).size.width - 40,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
-            color: Theme.of(context).primaryColor,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 10.0,
-              left: 15,
-              right: 125,
+        ClipPath(
+          clipper: PromoCustomClipper(),
+          child: Container(
+            margin: const EdgeInsets.only(right: 5.0),
+            width: MediaQuery.of(context).size.width - 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Theme.of(context).primaryColor,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'FREE Delivery on your First 3 Orders.',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(color: Colors.white),
-                ),
-                SizedBox(height: 15),
-                Text(
-                  'Place an order of \$10 or more and the delivery fee is on us',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: Colors.white),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 10.0,
+                left: 15,
+                right: 125,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    promo.title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: Colors.white),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    promo.description,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6!
+                        .copyWith(color: Colors.white),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ],
     );
+  }
+}
+
+// ce code permet de faire defiler la promotion
+class PromoCustomClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = new Path();
+    path.lineTo(0, 0);
+    path.lineTo(0, size.height);
+    path.lineTo(225, size.height);
+    path.lineTo(275, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return false;
   }
 }
