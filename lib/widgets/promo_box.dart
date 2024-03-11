@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class PromoBox extends StatelessWidget {
-  const PromoBox({super.key});
+  const PromoBox({Key? key}); // Corrected the constructor syntax
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +15,13 @@ class PromoBox extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             image: DecorationImage(
               image: NetworkImage(
-                  'https://th.bing.com/th/id/OIP.oNJrYp3m1Z9VKn2LI0_mKwHaEK?rs=1&pid=ImgDetMain',
-                  fit: BoxFit.cover),
+                'https://th.bing.com/th/id/OIP.oNJrYp3m1Z9VKn2LI0_mKwHaEK?rs=1&pid=ImgDetMain',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
-        // Todo we will create a custom clipper in the next episode
+        // TODO: Create a custom clipper in the next episode
         Container(
           margin: const EdgeInsets.only(right: 5.0),
           width: MediaQuery.of(context).size.width - 40,

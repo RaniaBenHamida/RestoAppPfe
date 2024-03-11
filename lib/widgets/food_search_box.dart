@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class FoodSearch extends StatelessWidget {
-  const FoodSearch({
+class FoodSearchBox extends StatelessWidget {
+  const FoodSearchBox({
     super.key,
   });
 
