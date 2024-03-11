@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_app_resto/models/category_model.dart';
+import 'package:flutter_app_resto/widgets/category_box.dart';
+import 'package:flutter_app_resto/widgets/promo_box.dart';
+
 
 class Homescreen extends StatelessWidget {
-  static const String routeName = '/';
+  static const String routeName = '/home';
 
   static Route route() {
     return MaterialPageRoute(
@@ -14,14 +17,80 @@ class Homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Center(
-        child: SvgPicture.asset('asset/logo.svg', 
-        height: 100,
-        )
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: CustomAppBar(), // You need to define CustomAppBar
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 100,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount:
+                      Category.Categories.length, // Corrected capitalization
+                  itemBuilder: (context, index) {
+                    // This method returns the CategoryBox
+                    return CategoryBox(Category.categories[index]);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 125,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    // You need to return a widget here (e.g., PromoBox)
+                    return PromoBox();
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: IconButton(
+        icon: Icon(Icons.person),
+        onPressed: () {},
+      ),
+      centerTitle: false,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'CURRENT LOCATION',
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1!
+                .copyWith(color: Colors.white),
+          ),
+          Text(
+            'Singapore, 1 shenton way',
+            style: Theme.of(context)
+                .textTheme
+                .headline6!
+                .copyWith(color: Colors.white),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(56.0);
 }
