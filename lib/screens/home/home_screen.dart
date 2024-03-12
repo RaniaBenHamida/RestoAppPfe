@@ -1,15 +1,12 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_app_resto/models/category_model.dart';
 import 'package:flutter_app_resto/models/promo_model.dart';
 import 'package:flutter_app_resto/models/restaurant_model.dart';
-import 'package:flutter_app_resto/widgets/category_box.dart';
-import 'package:flutter_app_resto/widgets/promo_box.dart';
 import 'package:flutter_app_resto/widgets/widgets.dart';
 
 class Homescreen extends StatelessWidget {
-  static const String routeName = '/home';
+  static const String routeName = '/';
 
   static Route route() {
     return MaterialPageRoute(
@@ -38,7 +35,9 @@ class Homescreen extends StatelessWidget {
                       Category.Categories.length, // Corrected capitalization
                   itemBuilder: (context, index) {
                     // This method returns the CategoryBox
-                    return CategoryBox(category: Category[index],);
+                    return CategoryBox(
+                      category: Category[index],
+                    );
                   },
                 ),
               ),
@@ -53,7 +52,8 @@ class Homescreen extends StatelessWidget {
                   itemCount: Promo.promos.length,
                   itemBuilder: (context, index) {
                     // You need to return a widget here (e.g., PromoBox)
-                    return PromoBox(promo: Promo.promos[index]); // Placeholder for PromoBox
+                    return PromoBox(
+                        promo: Promo.promos[index]); // Placeholder for PromoBox
                   },
                 ),
               ),
@@ -70,7 +70,7 @@ class Homescreen extends StatelessWidget {
               ),
             ),
             ListView.builder(
-              shrinkWrap: true,
+                shrinkWrap: true,
                 itemCount: Restaurant.restaurants.length,
                 itemBuilder: (context, index) {
                   return RestaurantCard(
@@ -78,85 +78,14 @@ class Homescreen extends StatelessWidget {
                 })
           ],
         ),
+        
       ),
     );
   }
 }
-class RestaurantCard extends StatelessWidget {
-  final Restaurant restaurant;
 
-  const RestaurantCard({Key? key, required this.restaurant}) : super(key: key);
+// la classe customAppbar consiste de voir l'icon person et sa location
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  image: DecorationImage(
-                    image: NetworkImage(restaurant.imageUrl),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: Container(
-                  width: 60,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${restaurant.deliveryTime} min',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              Text(restaurant.name, style: Theme.of(context).textTheme.headline5),
-              SizedBox(height: 5),
-            Row(
-              children: 
-              restaurant.tags.map((tag) => restaurant.tags.indexOf(tag)== restaurant.tags.length -1
-              ? Text(tag, 
-                style: Theme.of(context).textTheme.bodyText1,)
-              : Text('$tag ', 
-                style: Theme.of(context).textTheme.bodyText1,),
-              )
-              .toList()
-            ),
-              SizedBox(height: 5),
-              Text('${restaurant.distance} km - \$${restaurant.deliveryFree} delevery free',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-            ],),
-          )
-        ],
-      ),
-    );
-  }
-}
-// la classe customAppbar consiste de voir l'icon person et sa location 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {

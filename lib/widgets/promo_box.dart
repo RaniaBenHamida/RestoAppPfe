@@ -4,7 +4,7 @@ import 'package:flutter_app_resto/models/promo_model.dart';
 
 class PromoBox extends StatelessWidget {
   final Promo promo;
-  const PromoBox({Key? key, required this.promo}); // Corrected the constructor syntax
+  const PromoBox({Key? key, required this.promo}); 
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,8 @@ class PromoBox extends StatelessWidget {
             image: DecorationImage(
               image: NetworkImage(
                 promo.imageUrl,
-              fit: BoxFit.cover,
               ),
+              fit: BoxFit.cover,
             ),
           ),
         ),

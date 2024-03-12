@@ -42,7 +42,9 @@ class FoodSearchBox extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(5.0)),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/filter');
+              },
               icon: Icon(
                 Icons.menu,
                 color: Theme.of(context).primaryColor,
