@@ -48,7 +48,7 @@ class Filterscreen extends StatelessWidget {
                     ),
                     child: Text('Aplly'),
                     onPressed: () {
-                      // cette fonctionnalité retourne les categories et les pricies qui se trouve dans le fichier restaurant_listing
+                      // cette fonctionnalité retourne les categories et les pricies qui se trouve dans le fichier restaurant
                       var categories = state.filter.categoryFilters
                           .where((filter) => filter.value)
                           .map((filter) => filter.category.name)
