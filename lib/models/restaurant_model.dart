@@ -8,6 +8,7 @@ class Restaurant extends Equatable {
   final List<String> tags;
   final List<MenuItem> menuItems;
   final int deliveryTime;
+  final String priceCategory;
   final double deliveryFree;
   final double distance;
 
@@ -18,6 +19,7 @@ class Restaurant extends Equatable {
     required this.tags,
     required this.menuItems,
     required this.deliveryTime,
+    required this.priceCategory,
     required this.deliveryFree,
     required this.distance,
   });
@@ -30,6 +32,7 @@ class Restaurant extends Equatable {
         tags,
         menuItems,
         deliveryTime,
+        priceCategory,
         deliveryFree,
         distance,
       ];
@@ -48,6 +51,7 @@ class Restaurant extends Equatable {
       menuItems:
           MenuItem.menuItems.where((item) => item.restaurantId == 1).toList(),
       deliveryTime: 30,
+      priceCategory: '\$',
       deliveryFree: 2.99,
       distance: 0.1,
     ),
@@ -64,6 +68,7 @@ class Restaurant extends Equatable {
       menuItems:
           MenuItem.menuItems.where((item) => item.restaurantId == 2).toList(),
       deliveryTime: 30,
+      priceCategory: '\$',
       deliveryFree: 2.99,
       distance: 0.1,
     ),
@@ -73,13 +78,14 @@ class Restaurant extends Equatable {
       imageUrl:
           'https://th.bing.com/th/id/R.9e51f1be1f879a30579bcc731d5fc84c?rik=L2CCb3MvGoK6Dg&pid=ImgRaw&r=0',
       tags: MenuItem.menuItems
-            .where((item) => item.restaurantId == 3)
-            .map((item) => item.category)
-            .toSet()
-            .toList(),
+          .where((item) => item.restaurantId == 3)
+          .map((item) => item.category)
+          .toSet()
+          .toList(),
       menuItems:
           MenuItem.menuItems.where((item) => item.restaurantId == 3).toList(),
       deliveryTime: 30,
+      priceCategory: '\$',
       deliveryFree: 2.99,
       distance: 0.1,
     ),
@@ -95,6 +101,7 @@ class Restaurant extends Equatable {
       menuItems:
           MenuItem.menuItems.where((item) => item.restaurantId == 4).toList(),
       deliveryTime: 30,
+      priceCategory: '\$',
       deliveryFree: 2.99,
       distance: 0.1,
     ),
