@@ -5,3 +5,4 @@ export 'promo_model.dart';
 export 'place_autocomplete_model.dart';
 export 'place_model.dart';
 export 'filters_model.dart';
+export 'basket_model.dart';

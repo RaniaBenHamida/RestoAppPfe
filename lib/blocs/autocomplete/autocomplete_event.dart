@@ -1,12 +1,15 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_app_resto/models/place_autocomplete_model.dart';
+
 abstract class AutocompleteEvent extends Equatable {
   const AutocompleteEvent();
   @override
   List<Object> get props => [];
 }
 
-class LoadingAutocomplete extends AutocompleteEvent {}
+class LoadingAutocomplete extends AutocompleteEvent {
+  @override
+  List<Object> get props => [];
+}
 
 class LoadedAutocomplete extends AutocompleteEvent {
   final String searchInput;

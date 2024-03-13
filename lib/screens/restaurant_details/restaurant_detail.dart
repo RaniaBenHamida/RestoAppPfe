@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_resto/blocs/basket/basket_bloc.dart';
+import 'package:flutter_app_resto/blocs/basket/basket_event.dart';
+import 'package:flutter_app_resto/blocs/basket/basket_state.dart';
 import 'package:flutter_app_resto/models/models.dart';
 import 'package:flutter_app_resto/models/restaurant_model.dart';
 import 'package:flutter_app_resto/widgets/restaurant_information.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RestaurantDetailsScreen extends StatelessWidget {
   static const String routeName = '/restaurant_details';
@@ -114,14 +118,20 @@ class RestaurantDetailsScreen extends StatelessWidget {
                             children: [
                               Text('\$${item.price}',
                                   style: Theme.of(context).textTheme.bodyText1),
-                              IconButton(
-                                onPressed: () {},
-                                // ici tu dois mettre accentColor au lieu de primaryColor mais impossible !!!
-                                icon: Icon(
-                                  Icons.add_circle,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
+                              BlocBuilder<BasketBloc, BasketState>(
+                                  builder: (context, state) {
+                                return IconButton(
+                                  onPressed: () {
+                                    context.read<BasketBloc>()
+                                      ..add(AddItem(item));
+                                  },
+                                  // ici tu dois mettre accentColor au lieu de primaryColor mais impossible !!!
+                                  icon: Icon(
+                                    Icons.add_circle,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                );
+                              }),
                             ],
                           ),
                         ),

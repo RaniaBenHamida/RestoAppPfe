@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app_resto/blocs/autocomplete/autocomplete_bloc.dart';
 import 'package:flutter_app_resto/blocs/autocomplete/autocomplete_event.dart';
-import 'package:flutter_app_resto/blocs/filters/filters.state.dart';
+import 'package:flutter_app_resto/blocs/basket/basket_bloc.dart';
+import 'package:flutter_app_resto/blocs/basket/basket_event.dart';
 import 'package:flutter_app_resto/blocs/filters/filters_bloc.dart';
+import 'package:flutter_app_resto/blocs/filters/filters_event.dart';
 import 'package:flutter_app_resto/blocs/geolocation/geolocation_bloc.dart';
 import 'package:flutter_app_resto/blocs/geolocation/geolocation_event.dart';
 import 'package:flutter_app_resto/blocs/place/place_bloc.dart';
@@ -52,7 +54,10 @@ class MyApp extends StatelessWidget {
               create: (context) => PlaceBloc(
                   placeRepository: context.read<PlaceRepository>())
                 ),
-          BlocProvider(create: (context) => FilterBloc()..add(FiltersLoaded()),
+          BlocProvider(create: (context) => FilterBloc()..add(FilterLoaded()),
+          ),
+          BlocProvider(create: (context) => BasketBloc()..add(StartBasket(),
+          ),
           )
         ],
         

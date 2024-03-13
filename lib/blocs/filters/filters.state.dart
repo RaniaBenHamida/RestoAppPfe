@@ -10,7 +10,10 @@ abstract class FiltersState extends Equatable {
   List<Object> get props => [];
 }
 
-class FiltersLoading extends FiltersState {}
+class FiltersLoading extends FiltersState {
+  @override
+  List<Object> get props => [];
+}
 
 class FiltersLoaded extends FiltersState {
   final Filter filter;

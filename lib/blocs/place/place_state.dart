@@ -7,7 +7,10 @@ abstract class PlaceState extends Equatable {
   List<Object> get props => [];
 }
 
-class Placeloading extends PlaceState {}
+class Placeloading extends PlaceState {
+  @override
+  List<Object> get props => [];
+}
 
 class Placeloaded extends PlaceState {
   final Place place;
