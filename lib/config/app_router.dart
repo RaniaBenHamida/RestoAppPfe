@@ -8,6 +8,7 @@ import 'package:flutter_app_resto/screens/home/home_screen.dart';
 import 'package:flutter_app_resto/screens/location/location_screen.dart';
 import 'package:flutter_app_resto/screens/restaurant_details/restaurant_detail.dart';
 import 'package:flutter_app_resto/screens/restaurant_listing/restaurant_listing_screen.dart';
+import 'package:flutter_app_resto/screens/screens.dart';
 import 'package:flutter_app_resto/screens/voucher/voucher_screen.dart';
 
 class AppRouter {
@@ -23,30 +24,23 @@ class AppRouter {
         return Locationscreen.route();
       case Basketscreen.routeName:
         return Basketscreen.route();
-      case EditBasketscreen.routeName:
-        return EditBasketscreen.route();
       case CheckOutscreen.routeName:
         return CheckOutscreen.route();
       case DeliveryTimeScreen.routeName:
         return DeliveryTimeScreen.route();
+      case EditBasketScreen.routeName:
+        return EditBasketScreen.route();
       case Filterscreen.routeName:
-        return Filterscreen.route(
-          
-        );
+        return Filterscreen.route();
       case RestaurantDetailsScreen.routeName:
         return RestaurantDetailsScreen.route(
-          restaurant: settings.arguments as Restaurant
-        );
-  
-      case CheckOutscreen.routeName:
-        return CheckOutscreen.route();
+            restaurant: settings.arguments as Restaurant);
       case VoucherScreen.routeName:
         return VoucherScreen.route();
       case RestaurantListingScreen.routeName:
         return RestaurantListingScreen.route(
-            restaurant: settings.arguments as List<Restaurant>, restaurants: [],
-          );
-      
+          restaurants: settings.arguments as List<Restaurant>,
+        );
       default:
         return _errorRoute();
     }

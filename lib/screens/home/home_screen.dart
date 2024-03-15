@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_resto/models/category_model.dart';
 import 'package:flutter_app_resto/models/promo_model.dart';
@@ -19,7 +18,7 @@ class Homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: CustomAppBar(), // You need to define CustomAppBar
+      appBar: CustomAppBar(), // Define CustomAppBar
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -32,11 +31,11 @@ class Homescreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount:
-                      Category.Categories.length, // Corrected capitalization
+                      Category.Categories.length, // Correct capitalization
                   itemBuilder: (context, index) {
                     // This method returns the CategoryBox
                     return CategoryBox(
-                      category: Category[index],
+                      category: Category.Categories[index],
                     );
                   },
                 ),
@@ -47,13 +46,13 @@ class Homescreen extends StatelessWidget {
               child: SizedBox(
                 height: 125,
                 child: ListView.builder(
+                  key: UniqueKey(), // Provide a unique key
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: Promo.promos.length,
                   itemBuilder: (context, index) {
-                    // You need to return a widget here (e.g., PromoBox)
-                    return PromoBox(
-                        promo: Promo.promos[index]); // Placeholder for PromoBox
+                    // Return the appropriate widget for PromoBox
+                    return PromoBox(promo: Promo.promos[index]);
                   },
                 ),
               ),
@@ -70,26 +69,28 @@ class Homescreen extends StatelessWidget {
               ),
             ),
             ListView.builder(
-                shrinkWrap: true,
-                itemCount: Restaurant.restaurants.length,
-                itemBuilder: (context, index) {
-                  return RestaurantCard(
-                      restaurant: Restaurant.restaurants[index]);
-                })
+              shrinkWrap: true,
+              itemCount: Restaurant.restaurants.length,
+              itemBuilder: (context, index) {
+                return RestaurantCard(
+                  restaurant: Restaurant.restaurants[index],
+                );
+              },
+            ),
           ],
         ),
-        
       ),
     );
   }
 }
 
-// la classe customAppbar consiste de voir l'icon person et sa location
-
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+// La classe CustomAppBar consiste à afficher l'icône personne et sa localisation
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor:
+          Theme.of(context).primaryColor, // Définir la couleur d'arrière-plan
       leading: IconButton(
         icon: Icon(Icons.person),
         onPressed: () {},
@@ -106,7 +107,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 .copyWith(color: Colors.white),
           ),
           Text(
-            'Singapore, 1 shenton way',
+            'Singapore, 1 Shenton Way',
             style: Theme.of(context)
                 .textTheme
                 .headline6!
@@ -118,5 +119,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(56.0);
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight); // Taille préférée de l'AppBar
 }

@@ -5,6 +5,10 @@ import 'package:flutter_app_resto/models/models.dart';
 import 'package:flutter_app_resto/models/price%20_filter_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+
+
+
 class FilterBloc extends Bloc<FiltersEvent, FiltersState> {
   FilterBloc() : super(FiltersLoading());
 
@@ -44,10 +48,11 @@ class FilterBloc extends Bloc<FiltersEvent, FiltersState> {
             : categoryFilter;
       }).toList();
       yield FiltersLoaded(
-          filter: Filter(
-        categoryFilters: updatedCategoryFilters,
-        priceFilters: state.filter.priceFilters,
-      ));
+        filter: Filter(
+          categoryFilters: updatedCategoryFilters,
+          priceFilters: state.filter.priceFilters,
+        ),
+      );
     }
   }
 
@@ -56,18 +61,18 @@ class FilterBloc extends Bloc<FiltersEvent, FiltersState> {
     FiltersState state,
   ) async* {
     if (state is FiltersLoaded) {
-      final List<PriceFilter> UpdatedPriceFilters =
+      final List<PriceFilter> updatedPriceFilters =
           state.filter.priceFilters.map((priceFilter) {
         return priceFilter.id == event.priceFilter.id
             ? event.priceFilter
             : priceFilter;
       }).toList();
-
       yield FiltersLoaded(
-          filter: Filter(
-        categoryFilters: state.filter.categoryFilters,
-        priceFilters: UpdatedPriceFilters,
-      ));
+        filter: Filter(
+          categoryFilters: state.filter.categoryFilters,
+          priceFilters: updatedPriceFilters,
+        ),
+      );
     }
   }
 }
