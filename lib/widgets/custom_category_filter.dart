@@ -48,7 +48,7 @@ class CustomCategoryFilter extends StatelessWidget {
                           onChanged: (bool? newValue) {
                             context.read<FilterBloc>()
                               ..add(
-                                CategoryFilterUpdated(
+                                UpdatedCategoryFilter(
                                     categoryFilter: state
                                         .filter.categoryFilters[index]
                                         .copyWith(

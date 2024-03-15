@@ -29,7 +29,7 @@ class CustomPriceFilter extends StatelessWidget {
                       onTap: () {
                         // Trigger PriceFilterUpdated event with new value
                         context.read<FilterBloc>().add(
-                              PriceFilterUpdated(
+                              UpdatedPriceFilter(
                                 priceFilter: state
                                     .filter.priceFilters[price.key]
                                     .copyWith(

@@ -15,15 +15,21 @@ import 'package:flutter_app_resto/firebase_options.dart';
 import 'package:flutter_app_resto/repositories/geolocalisation/geolocation_repository.dart';
 import 'package:flutter_app_resto/repositories/places/place_repository.dart';
 import 'package:flutter_app_resto/screens/restaurant_listing/restaurant_listing_screen.dart';
+import 'package:flutter_app_resto/simple_bloc_observer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // Initialize Firebase first
-  //Bloc.observer = SimpleBlocObserver();
-  runApp(MyApp());
+ BlocOverrides.runZoned(
+    () {
+      runApp(MyApp());
+    },
+    blocObserver: SimpleBlocObserver(), // Provide your bloc observer here if needed
+  );
 }
+
 
 
 class MyApp extends StatelessWidget {
@@ -54,7 +60,7 @@ class MyApp extends StatelessWidget {
               create: (context) => PlaceBloc(
                   placeRepository: context.read<PlaceRepository>())
                 ),
-          BlocProvider(create: (context) => FilterBloc()..add(FilterLoaded()),
+          BlocProvider(create: (context) => FilterBloc()..add(LoadedFilter()),
           ),
           BlocProvider(create: (context) => BasketBloc()..add(StartBasket(),
           ),
