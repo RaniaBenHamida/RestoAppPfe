@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_app_resto/models/menu_item_model.dart';
+import 'package:flutter_app_resto/models/voucher_model.dart';
 
 abstract class BasketEvent extends Equatable {
   const BasketEvent();
@@ -31,7 +32,6 @@ class RemoveItem extends BasketEvent {
   List<Object> get props => [item];
 }
 
-
 class RemoveAllItem extends BasketEvent {
   final MenuItem item;
 
@@ -43,7 +43,15 @@ class RemoveAllItem extends BasketEvent {
 
 class ToggleSwitch extends BasketEvent {
   const ToggleSwitch();
-  
+
   @override
   List<Object> get props => [];
+}
+
+class AddVoucher extends BasketEvent {
+  final Voucher voucher;
+  const AddVoucher(this.voucher);
+
+  @override
+  List<Object> get props => [voucher];
 }

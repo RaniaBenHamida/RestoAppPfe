@@ -20,6 +20,9 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     } else if (event is ToggleSwitch) {
       yield* _mapToggleSwitchTostate(event, state);
     }
+    else if (event is AddVoucher) {
+      yield* _mapAddVoucherTostate(event, state);
+    }
   }
 
   Stream<BasketState> _mapStartBasketTostate() async* {
@@ -78,6 +81,20 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
       try{
         yield BasketLoaded(basket: state.basket.copyWith(cutlery: !state.basket.cutlery,),
       );
+      } catch (_) {}
+    }
+  }
+
+  Stream<BasketState> _mapAddVoucherTostate(
+    AddVoucher event,
+    BasketState state,
+  ) async* {
+    if (state is BasketLoaded) {
+      try {
+        yield BasketLoaded(
+          basket: state.basket.copyWith(voucher: event.voucher)
+       
+        );
       } catch (_) {}
     }
   }
