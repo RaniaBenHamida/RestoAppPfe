@@ -38,7 +38,9 @@ class Basketscreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(),
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/edit_basket');
+                  },
                   child: Text('Go To checkout'),
                 ),
               ],
@@ -262,58 +264,71 @@ class Basketscreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: BlocBuilder<BasketBloc, BasketState>(
+                    builder: (context, state) {
+                  if (state is BasketLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is BasketLoaded) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'Subtotal',
-                          style: Theme.of(context).textTheme.headline6,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Subtotal',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            Text(
+                              '\$${state.basket.subtotalString}',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
-                        Text(
-                          '\$20.0',
-                          style: Theme.of(context).textTheme.headline6,
+                        SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Delivery fee',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                            Text(
+                              '\$5.00',
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         ),
+                        SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Total',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                      color: Theme.of(context).primaryColor),
+                            ),
+                            Text(
+                              '\$${state.basket.totalString}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                      color: Theme.of(context).primaryColor),
+                            ),
+                          ],
+                        )
                       ],
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Delivery fee',
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        Text(
-                          '\$5.0',
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                        Text(
-                          '\$25.0',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Theme.of(context).primaryColor),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                    );
+                  } else {
+                    return Text('Something went wrong.');
+                  }
+                }),
               ),
             ],
           ),

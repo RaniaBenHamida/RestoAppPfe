@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app_resto/models/restaurant_model.dart';
 import 'package:flutter_app_resto/widgets/restaurant_card.dart';
@@ -31,7 +31,7 @@ class RestaurantListingScreen extends StatelessWidget {
               itemCount: restaurants.length,
               itemBuilder: (context, builder) {
                 // y'a une erreur ici 
-                return RestaurantCard(restaurant: restaurants[Index]);
+                return RestaurantCard(restaurant: restaurants[index]);
               }),
         ));
   }
