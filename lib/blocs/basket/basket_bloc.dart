@@ -14,20 +14,20 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
       yield* _mapStartBasketTostate();
     } else if (event is AddItem) {
       yield* _mapAddItemTostate(event, state);
-    } 
-    else if (event is RemoveAllItem) {
+    } else if (event is RemoveAllItem) {
       yield* _mapRemoveAllItemTostate(event, state);
     } else if (event is ToggleSwitch) {
       yield* _mapToggleSwitchTostate(event, state);
-    }
-    else if (event is AddVoucher) {
+    } else if (event is AddVoucher) {
       yield* _mapAddVoucherTostate(event, state);
+    } else if (event is SelectDeliveryTime) {
+      yield* _mapSelectDeliveryTimeTostate(event, state);
     }
   }
 
   Stream<BasketState> _mapStartBasketTostate() async* {
     yield BasketLoading();
-    try{
+    try {
       await Future<void>.delayed(const Duration(seconds: 1));
       yield BasketLoaded(basket: Basket());
     } catch (_) {}
@@ -37,12 +37,12 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     AddItem event,
     BasketState state,
   ) async* {
-    if(state is BasketLoaded){
-      try{
-        yield BasketLoaded(basket: state.basket
-        .copyWith(items: List.from(state.basket.items)
-        ..add(event.item)));
-      }catch(_) {}
+    if (state is BasketLoaded) {
+      try {
+        yield BasketLoaded(
+            basket: state.basket.copyWith(
+                items: List.from(state.basket.items)..add(event.item)));
+      } catch (_) {}
     }
   }
 
@@ -59,7 +59,6 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     }
   }
 
-  
   Stream<BasketState> _mapRemoveAllItemTostate(
     RemoveAllItem event,
     BasketState state,
@@ -67,8 +66,11 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     if (state is BasketLoaded) {
       try {
         yield BasketLoaded(
-            basket: state.basket.copyWith(
-                items: List.from(state.basket.items)..removeWhere((item)=> item == event.item),),);
+          basket: state.basket.copyWith(
+            items: List.from(state.basket.items)
+              ..removeWhere((item) => item == event.item),
+          ),
+        );
       } catch (_) {}
     }
   }
@@ -77,10 +79,13 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     ToggleSwitch event,
     BasketState state,
   ) async* {
-    if(state is BasketLoaded){
-      try{
-        yield BasketLoaded(basket: state.basket.copyWith(cutlery: !state.basket.cutlery,),
-      );
+    if (state is BasketLoaded) {
+      try {
+        yield BasketLoaded(
+          basket: state.basket.copyWith(
+            cutlery: !state.basket.cutlery,
+          ),
+        );
       } catch (_) {}
     }
   }
@@ -92,10 +97,23 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     if (state is BasketLoaded) {
       try {
         yield BasketLoaded(
-          basket: state.basket.copyWith(voucher: event.voucher)
-       
-        );
+            basket: state.basket.copyWith(voucher: event.voucher));
       } catch (_) {}
+    }
+  }
+
+  Stream<BasketState> _mapSelectDeliveryTimeTostate(
+    SelectDeliveryTime event,
+    BasketState state,
+  ) async* {
+    if (state is BasketLoaded) {
+      try {
+        yield BasketLoaded(
+          basket: state.basket.copyWith(deliveryTime: event.deliveryTime),
+        );
+      } catch (_) {
+        // Gérer les erreurs éventuelles ici
+      }
     }
   }
 }

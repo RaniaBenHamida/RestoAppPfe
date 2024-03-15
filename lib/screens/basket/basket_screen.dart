@@ -178,27 +178,46 @@ class Basketscreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SvgPicture.asset('assets/delivery_tmies.png'),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: 20),
-                            Text(
-                              'Delivery in 20 minutes',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Change',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
-                                        color: Theme.of(context).primaryColor),
-                              ),
-                            ),
-                          ],
-                        ),
+                        BlocBuilder<BasketBloc, BasketState>(
+                            builder: (context, state) {
+                          if (state is BasketLoaded) {
+                            return state.basket.deliveryTime == null
+                                ? Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: 20),
+                                      Text(
+                                        'Delivery in 20 minutes',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6,
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, '/delivery_time');
+                                        },
+                                        child: Text(
+                                          'Change',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Text(
+                                    'Delivery at ${state.basket.deliveryTime!.value}',
+                                    style:
+                                        Theme.of(context).textTheme.headline6);
+                          } else {
+                            return Text('Something went wrong.');
+                          }
+                        }),
                         if (state.basket.voucher == null)
                           Text(
                             'Your voucher is added !',
@@ -344,4 +363,3 @@ class Basketscreen extends StatelessWidget {
     );
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_app_resto/models/delivery_time.dart';
 import 'package:flutter_app_resto/models/menu_item_model.dart';
 import 'package:flutter_app_resto/models/voucher_model.dart';
 
@@ -6,23 +7,27 @@ class Basket extends Equatable {
   final List<MenuItem> items;
   final bool cutlery;
   final Voucher? voucher;
+  final DeliveryTime? deliveryTime;
 
   Basket({
     this.items = const <MenuItem>[],
     this.cutlery = false,
     this.voucher,
+    this.deliveryTime,
   });
 
-  Basket copyWith({List<MenuItem>? items, bool? cutlery, Voucher? voucher}) {
+  Basket copyWith({List<MenuItem>? items, bool? cutlery, Voucher? voucher, DeliveryTime? deliveryTime})
+   {
     return Basket(
       items: items ?? this.items,
       cutlery: cutlery ?? this.cutlery,
       voucher: voucher ?? this.voucher,
+      deliveryTime: deliveryTime ?? this.deliveryTime,
     );
   }
 
   @override
-  List<Object?> get props => [items, cutlery, voucher];
+  List<Object?> get props => [items, cutlery, voucher, deliveryTime];
 
   Map itemQuantity(items) {
     var quantity = Map();

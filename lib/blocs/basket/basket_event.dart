@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_app_resto/models/delivery_time.dart';
 import 'package:flutter_app_resto/models/menu_item_model.dart';
 import 'package:flutter_app_resto/models/voucher_model.dart';
 
@@ -54,4 +55,13 @@ class AddVoucher extends BasketEvent {
 
   @override
   List<Object> get props => [voucher];
+}
+
+class SelectDeliveryTime extends BasketEvent {
+  final DeliveryTime deliveryTime;
+
+   const SelectDeliveryTime(this.deliveryTime);
+
+  @override
+  List<Object> get props => [deliveryTime];
 }
