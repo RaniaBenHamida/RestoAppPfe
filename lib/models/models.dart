@@ -6,3 +6,5 @@ export 'place_autocomplete_model.dart';
 export 'place_model.dart';
 export 'filters_model.dart';
 export 'basket_model.dart';
+export 'price_model.dart';
+export 'voucher_model.dart';

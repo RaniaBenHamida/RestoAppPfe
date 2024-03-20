@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 class Category extends Equatable {
   final int id;
   final String name;
-  final Image image;
+  final  Image image;
 
   Category({required this.id, required this.name, required this.image});
   

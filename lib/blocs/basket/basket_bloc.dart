@@ -3,18 +3,31 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_app_resto/blocs/basket/basket_event.dart';
 import 'package:flutter_app_resto/blocs/basket/basket_state.dart';
+import 'package:flutter_app_resto/blocs/voucher/voucher_bloc.dart';
+import 'package:flutter_app_resto/blocs/voucher/voucher_state.dart';
 
 import '../../models/models.dart';
 
 class BasketBloc extends Bloc<BasketEvent, BasketState> {
-  BasketBloc() : super(BasketLoading()) {
+  final VoucherBloc _voucherBloc;
+  late StreamSubscription _streamSubscription;
+  BasketBloc({required VoucherBloc voucherBloc})
+      : _voucherBloc = voucherBloc,
+        super(BasketLoading()) {
     on<StartBasket>(_onStartBasket);
     on<AddItem>(_onAddItem);
     on<RemoveItem>(_onRemoveItem);
     on<RemoveAllItem>(_onRemoveAllItem);
     on<ToggleSwitch>(_onToggleSwitch);
-    on<AddVoucher>(_onAddVoucher);
+    on<ApplyVoucher>(_onApplyVoucher);
     on<SelectDeliveryTime>(_onSelectDeliveryTime);
+
+    _streamSubscription = voucherBloc.stream.listen((state) {
+      if (state is VoucherSelected)
+        add(
+          ApplyVoucher(state.voucher),
+        );
+    });
   }
 
   void _onStartBasket(
@@ -98,8 +111,8 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     }
   }
 
-  void _onAddVoucher(
-    AddVoucher event,
+  void _onApplyVoucher(
+    ApplyVoucher event,
     Emitter<BasketState> emit,
   ) {
     final state = this.state;

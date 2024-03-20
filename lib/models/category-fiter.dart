@@ -6,8 +6,11 @@ class CategoryFilter extends Equatable {
   final Category category;
   final bool value;
 
-  CategoryFilter(
-      {required this.id, required this.category, required this.value});
+  CategoryFilter({
+    required this.id, 
+    required this.category, 
+    required this.value
+  });
 
   CategoryFilter copyWith({
     int? id,

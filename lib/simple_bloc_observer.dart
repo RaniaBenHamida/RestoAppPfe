@@ -13,7 +13,6 @@ class SimpleBlocObserver extends BlocObserver {
     super.onError(bloc, error, stackTrace);
   }
 
-  @override
   void onTansition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
     print(transition);

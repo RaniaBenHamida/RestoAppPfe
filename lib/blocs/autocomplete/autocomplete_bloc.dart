@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:flutter_app_resto/blocs/autocomplete/autocomplete_event.dart';
 import 'package:flutter_app_resto/blocs/autocomplete/autocomplete_state.dart';
 import 'package:flutter_app_resto/models/place_autocomplete_model.dart';
