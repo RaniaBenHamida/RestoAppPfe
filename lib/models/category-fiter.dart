@@ -29,16 +29,19 @@ class CategoryFilter extends Equatable {
         category,
         value,
       ];
-}
+
+
 
 // Assuming this is your list of Category objects
-List<Category> categories = []; // populate this with your actual data
+ static List<Category> categories = []; // populate this with your actual data
 
 // Now you can create your filters
-List<CategoryFilter> filters = categories
+static List <CategoryFilter> filters = categories
     .map((category) => CategoryFilter(
           id: category.id,
           category: category,
           value: false,
         ))
     .toList();
+
+}

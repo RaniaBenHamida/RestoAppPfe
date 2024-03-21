@@ -25,16 +25,15 @@ class PriceFilter extends Equatable {
         price,
         value,
       ];
-}
 
-// Assuming this is your list of Price objects
-List<Price> pricies = []; // populate this with your actual data
+
 
 // Now you can create your filters
-List<PriceFilter> filters = pricies
-    .map((price) => PriceFilter(
-          id: price.id,
-          price: price,
-          value: false,
-        ))
-    .toList();
+ static List<PriceFilter> filters = Price.pricies
+      .map((price) => PriceFilter(
+            id: price.id,
+            price: price,
+            value: false,
+          ))
+      .toList();
+}
