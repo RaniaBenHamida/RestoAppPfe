@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "709832797690",
+    "project_id": "project06-49a5b",
+    "storage_bucket": "project06-49a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709832797690:android:ca705d8b8639e230ae8843",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app_resto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjfOjGC5762onjcI-oGd3NLS3vZwZ44sA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
